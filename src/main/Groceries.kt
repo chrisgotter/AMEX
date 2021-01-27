@@ -23,5 +23,7 @@ fun calculate(orderString: String):String {
             orangeCount++
         }
     }
-    return "the cost of $appleCount apples and $orangeCount oranges is: $${String.format("%.2f", appleCount * applePrice + orangeCount * orangePrice)}"
+    val appleTotal = (appleCount / 2 + appleCount % 2) * 0.6
+    val orangeTotal = (orangeCount / 3 * 2 + orangeCount % 3) * 0.25
+    return "the cost of $appleCount apples and $orangeCount oranges is: $${String.format("%.2f", appleTotal + orangeTotal)}"
 }
