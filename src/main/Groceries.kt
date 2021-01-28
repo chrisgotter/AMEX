@@ -1,29 +1,27 @@
+const val APPLE_PRICE: Double = 0.60
+const val ORANGE_PRICE: Double = 0.25
 fun main() {
     println("Please enter order")
     val orderString: String = readLine() as String
-    println(calculate(orderString))
+    calculatePrice(orderString)
 }
 
 /**
  * @param orderString a string comprised of 0 or more instances of "apple" and "orange" separated by "," and/or " "
  * @return a formatted string reporting the order and price
  */
-fun calculate(orderString: String):String {
+fun calculatePrice(orderString: String):Double {
 
-    val applePrice: Double = 0.60
-    val orangePrice: Double = 0.25
-    val orderList: List<String> = orderString.split(" ", ",")
-    var appleCount: Int = 0
-    var orangeCount: Int = 0
-
-    for (item in orderList) {
-        if (item == "apple") {
-            appleCount++
-        } else if (item == "orange") {
-            orangeCount++
+    var apples: Int = 0
+    var oranges: Int = 0
+    orderString.split(" ", ",").forEach{
+        if (it == "apple") {
+            apples++
+        } else if (it == "orange") {
+            oranges++
         }
     }
-    val appleTotal = (appleCount / 2 + appleCount % 2) * 0.6
-    val orangeTotal = (orangeCount / 3 * 2 + orangeCount % 3) * 0.25
-    return "the cost of $appleCount apples and $orangeCount oranges is: $${String.format("%.2f", appleTotal + orangeTotal)}"
+    val total: Double = (apples / 2 + apples % 2) * APPLE_PRICE + (oranges / 3 * 2 + oranges % 3) * ORANGE_PRICE
+    println("the cost of %2d apples and %2d oranges is: $%.2f".format(oranges, apples, total))
+    return total
 }
